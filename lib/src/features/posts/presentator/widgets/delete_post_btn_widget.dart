@@ -65,9 +65,9 @@ class DeletePostBtnWidget extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      context
-                          .read<CrudPostBloc>()
-                          .add(DeletePostEvent(postId: postId));
+                      context.read<CrudPostBloc>().add(
+                            DeletePostEvent(postId: postId),
+                          );
                     },
                     child: const Text("Sim"),
                   ),

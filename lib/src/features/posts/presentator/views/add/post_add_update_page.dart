@@ -23,39 +23,59 @@ class PostAddUpdatePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.deepPurple,
       appBar: AppBar(
         title: Text(isUpdate ? "Editar Post" : "Adicionar Post"),
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
-        elevation: 0,
+        elevation: 1,
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: BlocConsumer<CrudPostBloc, CrudPostState>(
-              builder: (context, state) {
-            if (state is CrudPostLoadingState) {
-              return const LoadingWidget();
-            } else if (state is CrudPostErrorState) {
-              return ErrorMessage(message: state.errorMessage);
-            } else {
-              return FormWidget(
-                  isUpdate: isUpdate, post: isUpdate ? post : null);
-            }
-          }, listener: (context, state) {
-            if (state is CrudPostLoadedState) {
-              SnackBarMessage()
-                  .showSucessSnackBar(message: state.message, context: context);
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (_) => const PostsPage(),
+          padding: const EdgeInsets.all(28.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(
+                height: 100,
+              ),
+              Container(
+                height: 400,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.white),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: BlocConsumer<CrudPostBloc, CrudPostState>(
+                        builder: (context, state) {
+                      if (state is CrudPostLoadingState) {
+                        return const LoadingWidget();
+                      } else if (state is CrudPostErrorState) {
+                        return ErrorMessage(message: state.errorMessage);
+                      } else {
+                        return FormWidget(
+                            isUpdate: isUpdate, post: isUpdate ? post : null);
+                      }
+                    }, listener: (context, state) {
+                      if (state is CrudPostLoadedState) {
+                        SnackBarMessage().showSucessSnackBar(
+                            message: state.message, context: context);
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                              builder: (_) => const PostsPage(),
+                            ),
+                            (route) => false);
+                      } else if (state is CrudPostErrorState) {
+                        SnackBarMessage().showErrorSnackBar(
+                            message: state.errorMessage, context: context);
+                      }
+                    }),
                   ),
-                  (route) => false);
-            } else if (state is CrudPostErrorState) {
-              SnackBarMessage().showErrorSnackBar(
-                  message: state.errorMessage, context: context);
-            }
-          }),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

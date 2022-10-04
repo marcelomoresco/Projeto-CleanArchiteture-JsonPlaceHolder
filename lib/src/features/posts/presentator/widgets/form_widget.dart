@@ -38,18 +38,23 @@ class _FormWidgetState extends State<FormWidget> {
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextFormFieldWidget(
-                name: "Title", multiLines: false, controller: _titleController),
-            TextFormFieldWidget(
-                name: "Body", multiLines: true, controller: _bodyController),
-            FormSubmitBtn(
-                isUpdatePost: widget.isUpdate,
-                onPressed: validateFormThenUpdateOrAddPost),
-          ]),
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        const Text(
+          "Editar Post",
+          style: TextStyle(
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        TextFormFieldWidget(
+            name: "Titulo", multiLines: false, controller: _titleController),
+        TextFormFieldWidget(
+            name: "Texto", multiLines: true, controller: _bodyController),
+        FormSubmitBtn(
+            isUpdatePost: widget.isUpdate,
+            onPressed: validateFormThenUpdateOrAddPost),
+      ]),
     );
   }
 

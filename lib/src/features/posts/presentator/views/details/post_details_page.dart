@@ -13,13 +13,31 @@ class PostDetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.deepPurple,
         appBar: AppBar(
-          title: Text("Post Detail"),
+          title: const Text("Post Detalhes"),
+          centerTitle: true,
+          elevation: 0,
         ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(10),
-            child: PostDetailWidget(post: post),
+        body: Padding(
+          padding: const EdgeInsets.all(18.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 370,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Colors.white,
+                ),
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(10),
+                    child: PostDetailWidget(post: post),
+                  ),
+                ),
+              ),
+            ],
           ),
         ));
   }

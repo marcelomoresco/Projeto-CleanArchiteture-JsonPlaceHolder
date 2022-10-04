@@ -27,7 +27,7 @@ class PostRepositoryImp implements IPostRepository {
   @override
   Future<Either<Failure, Unit>> addPost(Post post) async {
     final PostModel postModel = PostModel(
-      id: post.id,
+      id: post.id!,
       title: post.title,
       body: post.body,
     );
@@ -66,7 +66,7 @@ class PostRepositoryImp implements IPostRepository {
   @override
   Future<Either<Failure, Unit>> updatePost(Post post) async {
     final PostModel postModel = PostModel(
-      id: post.id,
+      id: post.id!,
       title: post.title,
       body: post.body,
     );

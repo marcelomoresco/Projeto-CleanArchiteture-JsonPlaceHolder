@@ -24,7 +24,7 @@ class PostsPage extends StatelessWidget {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => const PostAddUpdatePage(isUpdate: false)));
         },
-        child: const Icon(Icons.add_circle),
+        child: const Icon(Icons.add_circle_outline),
       ),
     );
   }
